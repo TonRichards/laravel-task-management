@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\User\AccountController;
+use App\Http\Controllers\Api\User\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\User\AccountController;
 |
 */
 
-Route::controller(AccountController::class)->group(function () {
+Route::controller(AuthController::class)->group(function () {
     Route::post('/register', 'register');
+    Route::get('/login', 'login');
 });
