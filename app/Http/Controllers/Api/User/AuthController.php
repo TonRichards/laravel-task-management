@@ -44,6 +44,15 @@ class AuthController extends Controller
         return response()->success($data);
     }
 
+    public function logout(Request $request): JsonResponse
+    {
+        $user = auth()->user()->token();
+
+        $user->revoke();
+
+        return response()->success();
+    }
+
     public function current(Request $request): JsonResponse
     {
         $user = auth()->user();
