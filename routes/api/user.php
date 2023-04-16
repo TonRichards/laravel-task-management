@@ -18,7 +18,8 @@ use App\Http\Controllers\Api\User\UserController;
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('/register', 'register');
-    Route::get('/login', 'login');
+    Route::post('/login', 'login');
+    Route::post('/logout', 'logout')->middleware('auth:api');
     Route::get('/current', 'current')->middleware('auth:api');
 });
 
