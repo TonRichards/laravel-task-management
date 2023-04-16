@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\User\AuthController;
+use App\Http\Controllers\Api\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/register', 'register');
     Route::get('/login', 'login');
     Route::get('/current', 'current')->middleware('auth:api');
+});
+
+Route::controller(UserController::class)->middleware('auth:api')->group(function () {
+    Route::put('/{uuid}', 'update');
 });

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('spaces', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
+            $table->uuid('uuid')->index();
             $table->string('name');
             $table->unsignedBigInteger('space_id')->nullable();
             $table->unsignedInteger('type_id');
