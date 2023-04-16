@@ -3,6 +3,7 @@
 namespace App\Services\User;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
 class UserBuilder
@@ -25,6 +26,7 @@ class UserBuilder
     public function register(Array $data): void
     {
         $this->model()->create([
+            'uuid' => Str::uuid(),
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -44,6 +46,18 @@ class UserBuilder
         if (!$check) {
             return null;
         }
+
+        return $user;
+    }
+
+    public function updateProfile(string $uuid, Array $data): User
+    {
+        $user = $this->findByUuid($uuid);
+
+        $user->update([
+            'name' => $data['name'],
+            'email' => $data['email']
+        ]);
 
         return $user;
     }
