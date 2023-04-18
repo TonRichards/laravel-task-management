@@ -32,6 +32,7 @@ class RouteServiceProvider extends ServiceProvider
             $this->apiRoute();
             $this->webRoute();
             $this->userApiRoute();
+            $this->spaceApiRoute();
         });
     }
 
@@ -53,6 +54,13 @@ class RouteServiceProvider extends ServiceProvider
         return Route::middleware('api')
             ->prefix('api/users')
             ->group(base_path('routes/api/user.php'));
+    }
+
+    private function spaceApiRoute()
+    {
+        return Route::middleware('auth:api')
+            ->prefix('api/spaces')
+            ->group(base_path('routes/api/space.php'));
     }
 
     /**
