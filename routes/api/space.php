@@ -17,4 +17,5 @@ use App\Http\Controllers\Api\Space\SpaceController;
 
 Route::controller(SpaceController::class)->group(function () {
     Route::post('/', 'store');
+    Route::put('/{uuid}', 'update');
 });
