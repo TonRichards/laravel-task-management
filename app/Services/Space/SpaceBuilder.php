@@ -14,6 +14,11 @@ class SpaceBuilder
         return new Space();
     }
 
+    public function findByUuid($uuid): Space
+    {
+        return $this->model()->where('uuid', $uuid)->firstOrFail();
+    }
+
     public function store(array $data): Space
     {
         $space = $this->model()->create([
@@ -30,7 +35,7 @@ class SpaceBuilder
 
     public function updateSpace(string $uuid, array $data): Space
     {
-        $space = $this->model()->where('uuid', $uuid)->firstOrFail();
+        $space = $this->findByUuid($uuid);
 
         $space->update([
             'name' => $data['name'],
@@ -38,5 +43,12 @@ class SpaceBuilder
         ]);
 
         return $space;
+    }
+
+    public function deleteSpace(string $uuid): void
+    {
+        $space = $this->findByUuid($uuid);
+
+        $space->delete();
     }
 }
