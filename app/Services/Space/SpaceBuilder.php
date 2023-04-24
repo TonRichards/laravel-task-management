@@ -14,7 +14,7 @@ class SpaceBuilder
         return new Space();
     }
 
-    public function store(Array $data): Space
+    public function store(array $data): Space
     {
         $space = $this->model()->create([
             'uuid'      => Str::uuid(),
@@ -23,6 +23,18 @@ class SpaceBuilder
             'type_id'   => getSpaceTypeId($data['type']),
             'user_id'   => auth()->user()->id,
             'slug'      => data_get($data, 'slug')
+        ]);
+
+        return $space;
+    }
+
+    public function updateSpace(string $uuid, array $data): Space
+    {
+        $space = $this->model()->where('uuid', $uuid)->firstOrFail();
+
+        $space->update([
+            'name' => $data['name'],
+            'slug' => $data['slug']
         ]);
 
         return $space;

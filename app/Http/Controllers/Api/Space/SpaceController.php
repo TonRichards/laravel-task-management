@@ -8,6 +8,7 @@ use App\Services\Space\SpaceBuilder;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Space\SpaceResource;
 use App\Http\Requests\Space\SpaceStoreRequest;
+use App\Http\Requests\Space\SpaceUpdateRequest;
 
 class SpaceController extends Controller
 {
@@ -23,6 +24,15 @@ class SpaceController extends Controller
         $data = $request->validated();
 
         $space = $this->spaceBuilder->store($data);
+
+        return response()->success(new SpaceResource($space));
+    }
+
+    public function update(SpaceUpdateRequest $request, $uuid): JsonResponse
+    {
+        $data = $request->validated();
+
+        $space = $this->spaceBuilder->updateSpace($uuid, $data);
 
         return response()->success(new SpaceResource($space));
     }
