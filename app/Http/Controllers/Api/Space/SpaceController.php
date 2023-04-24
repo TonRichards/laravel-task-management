@@ -36,4 +36,11 @@ class SpaceController extends Controller
 
         return response()->success(new SpaceResource($space));
     }
+
+    public function destroy($uuid): JsonResponse
+    {
+        $this->spaceBuilder->deleteSpace($uuid);
+
+        return response()->success();
+    }
 }
