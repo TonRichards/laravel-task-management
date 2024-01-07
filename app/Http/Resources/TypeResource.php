@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Space;
+namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SpaceResource extends JsonResource
+class TypeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,9 +14,6 @@ class SpaceResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
-            'uuid' => $this->uuid,
-            'name' => $this->name,
-        ];
+        return parent::toArray($request);
     }
 }

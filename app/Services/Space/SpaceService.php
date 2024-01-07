@@ -7,7 +7,7 @@ use App\Models\Space;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Collection;
 
-class SpaceBuilder
+class SpaceService
 {
     public function model(): Space
     {
@@ -26,7 +26,7 @@ class SpaceBuilder
             'name'      => data_get($data, 'name'),
             'space_id'  => data_get($data, 'space_id'),
             'type_id'   => getSpaceTypeId($data['type']),
-            'user_id'   => auth()->user()->id,
+            'user_id'   => Str::uuid(),
             'slug'      => data_get($data, 'slug')
         ]);
 

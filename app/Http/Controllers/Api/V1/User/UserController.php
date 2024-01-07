@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api\User;
+namespace App\Http\Controllers\Api\V1\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Services\User\UserBuilder;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\User\UserResource;
+use App\Http\Resources\UserResource;
 use App\Http\Requests\User\UserUpdateRequest;
 
 class UserController extends Controller

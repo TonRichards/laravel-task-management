@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Services\Type\TypeBuilder;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Type\TypeCollection;
+use App\Http\Resources\TypeCollection;
 
 class TypeController extends Controller
 {

@@ -1,29 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\Api\Space;
+namespace App\Http\Controllers\Api\V1\Space;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use App\Services\Space\SpaceBuilder;
+use App\Services\Space\SpaceService;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Space\SpaceResource;
+use App\Http\Resources\SpaceResource;
 use App\Http\Requests\Space\SpaceStoreRequest;
 use App\Http\Requests\Space\SpaceUpdateRequest;
 
 class SpaceController extends Controller
 {
-    protected SpaceBuilder $spaceBuilder;
+    protected SpaceService $spaceService;
 
-    public function __construct(SpaceBuilder $spaceBuilder)
+    public function __construct(SpaceService $spaceService)
     {
-        $this->spaceBuilder = $spaceBuilder;
+        $this->spaceService = $spaceService;
     }
 
     public function store(SpaceStoreRequest $request): JsonResponse
     {
         $data = $request->validated();
 
-        $space = $this->spaceBuilder->store($data);
+        $space = $this->spaceService->store($data);
 
         return response()->success(new SpaceResource($space));
     }
@@ -32,14 +32,14 @@ class SpaceController extends Controller
     {
         $data = $request->validated();
 
-        $space = $this->spaceBuilder->updateSpace($uuid, $data);
+        $space = $this->spaceService->updateSpace($uuid, $data);
 
         return response()->success(new SpaceResource($space));
     }
 
     public function destroy($uuid): JsonResponse
     {
-        $this->spaceBuilder->deleteSpace($uuid);
+        $this->spaceService->deleteSpace($uuid);
 
         return response()->success();
     }

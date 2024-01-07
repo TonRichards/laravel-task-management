@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Space extends Model
@@ -19,4 +20,9 @@ class Space extends Model
         'slug',
         'user_id'
     ];
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(Type::class);
+    }
 }

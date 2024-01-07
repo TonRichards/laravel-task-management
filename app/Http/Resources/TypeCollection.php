@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Type;
+namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\collection;
