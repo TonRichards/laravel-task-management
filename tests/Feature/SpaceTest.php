@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Type;
+use App\Models\Space;
 use Illuminate\Testing\Fluent\AssertableJson;
 
 it('create a new space', function () {
@@ -20,4 +21,10 @@ it('create a new space', function () {
                 })
                 ->etc();
         });
+});
+
+it('delete space', function () {
+    $space = Space::factory()->create();
+
+    $this->deleteJson("api/v1/spaces/{$space->uuid}")->assertStatus(200);
 });

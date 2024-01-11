@@ -28,7 +28,7 @@ class SpaceStoreRequest extends FormRequest
 
         return [
             'name' => 'required',
-            'slug' => 'unique:spaces,slug',
+            'slug' => Rule::unique('spaces', 'slug')->whereNull('deleted_at'),
             'type' => [
                 'required',
                 Rule::exists('types', 'name')->where(function (Builder $query) {

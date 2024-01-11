@@ -31,7 +31,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
             $this->apiRoute();
             $this->webRoute();
-            $this->spaceApiV1Route();
+            $this->apiV1Route();
         });
     }
 
@@ -48,11 +48,11 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/web.php'));
     }
 
-    private function spaceApiV1Route()
+    private function apiV1Route()
     {
         return Route::middleware('api')
             ->prefix('api/v1')
-            ->group(base_path('routes/v1/space.php'));
+            ->group(base_path('routes/v1/api.php'));
     }
 
     /**

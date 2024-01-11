@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Space;
+namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Services\Space\SpaceService;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SpaceResource;
+use App\Services\Space\SpaceCreateService;
 use App\Http\Requests\Space\SpaceStoreRequest;
 use App\Http\Requests\Space\SpaceUpdateRequest;
 
@@ -19,11 +20,9 @@ class SpaceController extends Controller
         $this->spaceService = $spaceService;
     }
 
-    public function store(SpaceStoreRequest $request): JsonResponse
+    public function store(SpaceStoreRequest $request, SpaceCreateService $service): JsonResponse
     {
-        $data = $request->validated();
-
-        $space = $this->spaceService->store($data);
+        $space = $service->store($request->validated());
 
         return response()->success(new SpaceResource($space));
     }
