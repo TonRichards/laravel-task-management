@@ -2,38 +2,14 @@
 
 namespace App\Services\Space;
 
-use App\Models\Type;
 use App\Models\Space;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class SpaceService
 {
-    public function model(): Space
+    public function paginate(Request $request): LengthAwarePaginator
     {
-        return new Space();
-    }
-
-    public function findByUuid($uuid): Space
-    {
-        return $this->model()->where('uuid', $uuid)->firstOrFail();
-    }
-
-    public function updateSpace(string $uuid, array $data): Space
-    {
-        $space = $this->findByUuid($uuid);
-
-        $space->update([
-            'name' => $data['name'],
-            'slug' => $data['slug']
-        ]);
-
-        return $space;
-    }
-
-    public function deleteSpace(string $uuid): void
-    {
-        $space = $this->findByUuid($uuid);
-
-        $space->delete();
+        return Space::paginate($request->get('per_page', 10));
     }
 }

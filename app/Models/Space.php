@@ -27,4 +27,9 @@ class Space extends Model
     {
         return $this->belongsTo(Type::class);
     }
+
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
+    }
 }
