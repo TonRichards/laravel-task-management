@@ -36,6 +36,11 @@ class SpaceController extends Controller
         return response()->success(new SpaceResource($space));
     }
 
+    public function show(Space $space): JsonResponse
+    {
+        return response()->success(new SpaceResource($space));
+    }
+
     public function update(Space $space, SpaceUpdateRequest $request, SpaceUpdateService $service): JsonResponse
     {
         $data = $request->validated();

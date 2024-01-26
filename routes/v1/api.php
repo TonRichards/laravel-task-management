@@ -20,6 +20,7 @@ Route::controller(UserController::class)->middleware('auth:api')->group(function
 Route::controller(SpaceController::class)->group(function () {
     Route::get('/spaces', 'index');
     Route::post('/spaces', 'store');
+    Route::get('spaces/{space}', 'show');
     Route::put('/spaces/{space}', 'update');
     Route::delete('/spaces/{space}', 'destroy');
 });
