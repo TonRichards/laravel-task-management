@@ -2,27 +2,41 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use App\Services\User\UserBuilder;
+use App\Services\User\UserService;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\User\UserUpdateRequest;
 
 class UserController extends Controller
 {
-    protected UserBuilder $userBuilder;
+    protected UserService $userService;
 
-    public function __construct(UserBuilder $userBuilder)
+    public function __construct(UserService $userService)
     {
-        $this->userBuilder = $userBuilder;
+        $this->userService = $userService;
     }
 
-    public function update(UserUpdateRequest $request, string $uuid): JsonResponse
+    public function index(Request $request): JsonResponse
+    {
+        $users = $this->userService->paginate($request);
+
+        return response()->success(new UserCollection($users));
+    }
+
+    public function show(User $user): JsonResponse
+    {
+        return response()->success(new UserResource($user));
+    }
+
+    public function update(UserUpdateRequest $request, User $user): JsonResponse
     {
         $data = $request->validated();
 
-        $user = $this->userBuilder->updateProfile($uuid, $data);
+        $user = $this->userService->update($user, $data);
 
         return response()->success(new UserResource($user));
     }

@@ -4,32 +4,35 @@ namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use App\Services\User\UserBuilder;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\UserLoginRequest;
-use App\Http\Requests\User\UserRegisterRequest;
+use App\Services\User\UserLoginService;
+use App\Services\User\UserRegisterService;
+use App\Http\Requests\V1\User\UserLoginRequest;
+use App\Http\Requests\V1\User\UserRegisterRequest;
 
 class AuthController extends Controller
 {
-    protected UserBuilder $userBuilder;
+    protected UserRegisterService $registerService;
 
-    public function __construct(UserBuilder $userBuilder)
+    protected UserLoginService $loginService;
+
+    public function __construct(UserRegisterService $registerService, UserLoginService $loginService)
     {
-        $this->userBuilder = $userBuilder;
+        $this->registerService = $registerService;
+
+        $this->loginService = $loginService;
     }
 
     public function register(UserRegisterRequest $request): JsonResponse
     {
-        $data = $request->validated();
-
-        $this->userBuilder->register($data);
+        $this->registerService->register($request->validated());
 
         return response()->created();
     }
 
     public function login(UserLoginRequest $request): JsonResponse
     {
-        $user = $this->userBuilder->checkUserLogin($request->email, $request->password);
+        $user = $this->loginService->checkUserLogin($request->email, $request->password);
 
         if (!$user) {
             return response()->unauthorized();

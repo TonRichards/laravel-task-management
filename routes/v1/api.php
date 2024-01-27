@@ -14,7 +14,8 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::controller(UserController::class)->middleware('auth:api')->group(function () {
-    Route::put('users/{uuid}', 'update');
+    Route::get('users', 'index');
+    Route::get('users/{user}', 'show');
 });
 
 Route::controller(SpaceController::class)->group(function () {
