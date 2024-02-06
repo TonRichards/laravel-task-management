@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class SpaceResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,7 +17,7 @@ class UserResource extends JsonResource
         return [
             'uuid' => $this->uuid,
             'name' => $this->name,
-            'email' => $this->email
+            'type' => $this->type->display_name,
         ];
     }
 }

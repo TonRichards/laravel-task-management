@@ -4,6 +4,7 @@ namespace App\Services\Space;
 
 use App\Models\Space;
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
 class SpaceCreateService
 {
@@ -11,11 +12,11 @@ class SpaceCreateService
     {
         return Space::create([
             'uuid'      => Str::uuid(),
-            'name'      => data_get($data, 'name'),
-            'space_id'  => data_get($data, 'space_id'),
-            'type_id'   => getSpaceTypeId($data['type']),
-            'user_id'   => 1,
-            'slug'      => data_get($data, 'slug')
+            'name'      => Arr::get($data, 'name'),
+            'space_id'  => Arr::get($data, 'space_id'),
+            'type_id'   => Arr::get($data, 'type_id'),
+            'user_id'   => 1, // need to update later
+            'slug'      => Arr::get($data, 'slug')
         ]);
     }
 }

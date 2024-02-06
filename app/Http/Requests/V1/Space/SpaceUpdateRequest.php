@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Space;
+namespace App\Http\Requests\Space\V1;
 
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Http\FormRequest;

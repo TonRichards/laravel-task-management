@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\SpaceController;
+use App\Http\Controllers\Api\V1\TaskController;
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('users/register', 'register');
@@ -24,4 +25,8 @@ Route::controller(SpaceController::class)->group(function () {
     Route::get('spaces/{space}', 'show');
     Route::put('/spaces/{space}', 'update');
     Route::delete('/spaces/{space}', 'destroy');
+});
+
+Route::controller(TaskController::class)->group(function () {
+    Route::post('/tasks', 'store');
 });
