@@ -33,4 +33,5 @@ Route::controller(TaskController::class)->group(function () {
     Route::get('/tasks/{task}', 'show');
     Route::put('/tasks/{task}', 'update');
     Route::delete('/tasks/{task}', 'destroy');
+    Route::put('/tasks/{task}/update-status', 'updateStatus');
 });

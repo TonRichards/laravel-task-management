@@ -18,4 +18,11 @@ class TaskUpdateService
 
         return $task;
     }
+
+    public function updateStatus(Task $task, array $data): Task
+    {
+        $task->update(['status_id' => $data['status_id']]);
+
+        return $task;
+    }
 }
