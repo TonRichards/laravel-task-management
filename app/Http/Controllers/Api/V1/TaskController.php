@@ -35,6 +35,11 @@ class TaskController extends Controller
         return response()->success(new TaskResource($task));
     }
 
+    public function show(Task $task)
+    {
+        return response()->success(new TaskResource($task));
+    }
+
     public function update(Task $task, TaskUpdateRequest $request, TaskUpdateService $service): JsonResponse
     {
         $data = $service->update($task, $request->validated());
