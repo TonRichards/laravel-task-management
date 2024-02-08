@@ -2,15 +2,29 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\controller;
+use App\Http\Requests\V1\Task\TaskStoreRequest;
+use App\Http\Resources\V1\TaskCollection;
 use App\Http\Resources\V1\TaskResource;
 use App\Services\Task\TaskCreateService;
-use App\Http\Requests\V1\Task\TaskStoreRequest;
+use App\Services\Task\TaskService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    public function __construct(protected TaskService $service)
+    {
+        $this->service = $service;
+    }
+
+    public function index(Request $request)
+    {
+        $tasks = $this->service->paginate($request);
+
+        return response()->success(new TaskCollection($tasks));
+    }
+
     public function store(TaskStoreRequest $request, TaskCreateService $service): JsonResponse
     {
         $task = $service->store($request->validated());

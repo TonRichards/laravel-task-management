@@ -30,6 +30,7 @@ class TaskStoreRequest extends FormRequest
             'space_id' => 'required|integer|exists:spaces,id',
             'type_id' => 'required|integer|exists:types,id',
             'status_id' => 'nullable|integer',
+            'task_id' => 'nullable|integer',
         ];
     }
 }

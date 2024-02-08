@@ -28,5 +28,6 @@ Route::controller(SpaceController::class)->group(function () {
 });
 
 Route::controller(TaskController::class)->group(function () {
+    Route::get('/tasks', 'index');
     Route::post('/tasks', 'store');
 });

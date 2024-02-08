@@ -17,7 +17,8 @@ class TaskCreateService
             'space_id' => Arr::get($data, 'space_id'),
             'type_id' => Arr::get($data, 'type_id'),
             'user_id' => 1, // need to update later
-            'status_id' => Arr::get($data, 'status_id', 1)
+            'status_id' => Arr::get($data, 'status_id', 1),
+            'task_id' => Arr::get($data, 'task_id')
         ]);
     }
 }
