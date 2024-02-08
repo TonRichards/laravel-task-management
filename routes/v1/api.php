@@ -31,4 +31,5 @@ Route::controller(TaskController::class)->group(function () {
     Route::get('/tasks', 'index');
     Route::post('/tasks', 'store');
     Route::put('/tasks/{task}', 'update');
+    Route::delete('/tasks/{task}', 'destroy');
 });

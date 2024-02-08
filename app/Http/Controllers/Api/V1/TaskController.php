@@ -41,4 +41,11 @@ class TaskController extends Controller
 
         return response()->success(new TaskResource($data));
     }
+
+    public function destroy(Task $task)
+    {
+        $task->delete();
+
+        return response()->success();
+    }
 }
