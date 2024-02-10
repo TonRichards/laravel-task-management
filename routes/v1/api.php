@@ -38,5 +38,6 @@ Route::controller(TaskController::class)->group(function () {
 });
 
 Route::controller(ChecklistController::class)->group(function () {
+    Route::get('/checklists', 'index');
     Route::post('/checklists', 'store');
 });
