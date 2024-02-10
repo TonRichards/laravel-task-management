@@ -42,4 +42,5 @@ Route::controller(ChecklistController::class)->group(function () {
     Route::post('/checklists', 'store');
     Route::put('/checklists/{checklist}', 'update');
     Route::put('/checklists/{checklist}/update-status', 'updateStatus');
+    Route::delete('/checklists/{checklist}', 'destroy');
 });

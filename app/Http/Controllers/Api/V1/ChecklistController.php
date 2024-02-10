@@ -50,4 +50,11 @@ class ChecklistController extends Controller
 
         return response()->success(new ChecklistResource($data));
     }
+
+    public function destroy(Checklist $checklist): JsonResponse
+    {
+        $checklist->delete();
+
+        return response()->success();
+    }
 }
