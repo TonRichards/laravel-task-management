@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\SpaceController;
 use App\Http\Controllers\Api\V1\TaskController;
+use App\Http\Controllers\Api\V1\ChecklistController;
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('users/register', 'register');
@@ -34,4 +35,8 @@ Route::controller(TaskController::class)->group(function () {
     Route::put('/tasks/{task}', 'update');
     Route::delete('/tasks/{task}', 'destroy');
     Route::put('/tasks/{task}/update-status', 'updateStatus');
+});
+
+Route::controller(ChecklistController::class)->group(function () {
+    Route::post('/checklists', 'store');
 });
