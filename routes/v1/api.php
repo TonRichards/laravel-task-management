@@ -40,4 +40,6 @@ Route::controller(TaskController::class)->group(function () {
 Route::controller(ChecklistController::class)->group(function () {
     Route::get('/checklists', 'index');
     Route::post('/checklists', 'store');
+    Route::put('/checklists/{checklist}', 'update');
+    Route::put('/checklists/{checklist}/update-status', 'updateStatus');
 });
