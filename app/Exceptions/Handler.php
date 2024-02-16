@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -9,24 +10,6 @@ use Throwable;
 
 class Handler extends ExceptionHandler
 {
-    /**
-     * A list of exception types with their corresponding custom log levels.
-     *
-     * @var array<class-string<\Throwable>, \Psr\Log\LogLevel::*>
-     */
-    protected $levels = [
-        //
-    ];
-
-    /**
-     * A list of the exception types that are not reported.
-     *
-     * @var array<int, class-string<\Throwable>>
-     */
-    protected $dontReport = [
-        //
-    ];
-
     /**
      * A list of the inputs that are never flashed to the session on validation exceptions.
      *
@@ -40,21 +23,51 @@ class Handler extends ExceptionHandler
 
     /**
      * Register the exception handling callbacks for the application.
-     *
-     * @return void
      */
     public function register()
     {
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
 
-        $this->renderable(function (NotFoundHttpException $e, Request $request) {
-            if ($request->is('api/*')) {
-                return response()->json([
-                    'message' => 'Record not found !!',
-                ], 404);
+    /**
+     * Render the exception into an HTTP response.
+     */
+    public function render($request, Throwable $e)
+    {
+        if ($request->wantsJson() || $request->is('api/*')) {
+
+            switch (get_class($e)) {
+                case NotFoundHttpException::class:
+
+                    return response()->json([
+                        'message' => 'Record not found !!',
+                    ], 404);
+
+                case ModelNotFoundException::class:
+
+                    return response()->json([
+                        'message' => class_basename($e->getModel()). ' Not found',
+                    ], 404);
+
+                default:
+
+                    $statusCode = (int) $e->getCode();
+
+                    if ($this->validStatusCode($statusCode)) {
+                        return response()->json([
+                            'message' => $e->getMessage(),
+                        ], $e->getCode());
+                    }
             }
-        });
+        }
+
+        return parent::render($request, $e);
+    }
+
+    protected function validStatusCode(int $statusCode): bool
+    {
+        return $statusCode > 100 && $statusCode <= 600;
     }
 }
