@@ -32,6 +32,7 @@ class RouteServiceProvider extends ServiceProvider
             $this->apiRoute();
             $this->webRoute();
             $this->apiV1Route();
+            $this->apiAuthV1Route();
         });
     }
 
@@ -50,9 +51,16 @@ class RouteServiceProvider extends ServiceProvider
 
     private function apiV1Route()
     {
-        return Route::middleware('api')
+        return Route::middleware(['api', 'auth:api'])
             ->prefix('api/v1')
             ->group(base_path('routes/v1/api.php'));
+    }
+
+    private function apiAuthV1Route()
+    {
+        return Route::middleware('api')
+            ->prefix('api/v1')
+            ->group(base_path('routes/v1/auth.php'));
     }
 
     /**
