@@ -18,7 +18,7 @@ class SpaceFactory extends Factory
     {
         return [
             'id' => fake()->randomDigitNot(0),
-            'uuid' =>fake()->uuid(),
+            'uuid' => fake()->uuid(),
             'slug' => fake()->slug(),
             'name' => fake()->name(),
             'type_id' => 1,

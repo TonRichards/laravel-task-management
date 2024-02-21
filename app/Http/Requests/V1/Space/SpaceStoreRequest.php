@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests\Space\V1;
 
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-use Illuminate\Database\Query\Builder;
-use Illuminate\Foundation\Http\FormRequest;
 
 class SpaceStoreRequest extends FormRequest
 {

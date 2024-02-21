@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Services\User\UserLoginService;
-use App\Services\User\UserRegisterService;
 use App\Http\Requests\V1\User\UserLoginRequest;
 use App\Http\Requests\V1\User\UserRegisterRequest;
+use App\Services\User\UserLoginService;
+use App\Services\User\UserRegisterService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -34,12 +34,12 @@ class AuthController extends Controller
     {
         $user = $this->loginService->checkUserLogin($request->email, $request->password);
 
-        if (!$user) {
+        if (! $user) {
             return response()->unauthorized();
         }
 
         $data = [
-            'name'  => $user->name,
+            'name' => $user->name,
             'email' => $user->email,
             'token' => $user->createToken('LaravelTaskManagementToken')->accessToken,
         ];

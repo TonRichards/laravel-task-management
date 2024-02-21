@@ -3,8 +3,8 @@
 namespace App\Http\Resources\V1;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\collection;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Support\collection;
 
 class TaskCollection extends ResourceCollection
 {
@@ -22,7 +22,7 @@ class TaskCollection extends ResourceCollection
                 'body' => $item->body,
                 'space' => $item->space->name,
                 'type' => $item->type->display_name,
-                'sub_tasks' => new SubTaskCollection($item->subTasks)
+                'sub_tasks' => new SubTaskCollection($item->subTasks),
             ];
         });
     }

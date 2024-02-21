@@ -13,7 +13,7 @@ class TaskUpdateService
             'name' => Arr::get($data, 'name'),
             'body' => Arr::get($data, 'body'),
             'type_id' => Arr::get($data, 'type_id'),
-            'task_id' => Arr::get($data, 'task_id')
+            'task_id' => Arr::get($data, 'task_id'),
         ]);
 
         return $task;

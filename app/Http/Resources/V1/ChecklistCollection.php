@@ -3,8 +3,8 @@
 namespace App\Http\Resources\V1;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\collection;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Support\collection;
 
 class ChecklistCollection extends ResourceCollection
 {

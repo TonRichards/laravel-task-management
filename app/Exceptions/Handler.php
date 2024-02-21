@@ -4,7 +4,6 @@ namespace App\Exceptions;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -48,7 +47,7 @@ class Handler extends ExceptionHandler
                 case ModelNotFoundException::class:
 
                     return response()->json([
-                        'message' => class_basename($e->getModel()). ' Not found',
+                        'message' => class_basename($e->getModel()).' Not found',
                     ], 404);
 
                 default:

@@ -13,11 +13,11 @@ class UserService
         return User::paginate($request->get('per_page', 10));
     }
 
-    public function update(User $user, Array $data): User
+    public function update(User $user, array $data): User
     {
         return $user->update([
             'name' => $data['name'],
-            'email' => $data['email']
+            'email' => $data['email'],
         ]);
     }
 }

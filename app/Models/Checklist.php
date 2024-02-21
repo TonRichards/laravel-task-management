@@ -15,7 +15,7 @@ class Checklist extends Model
     protected $fillable = [
         'name',
         'task_id',
-        'is_checked'
+        'is_checked',
     ];
 
     public function task(): BelongsTo

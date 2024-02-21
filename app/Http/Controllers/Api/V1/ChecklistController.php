@@ -8,11 +8,11 @@ use App\Http\Requests\V1\Checklist\ChecklistUpdateRequest;
 use App\Http\Resources\V1\ChecklistCollection;
 use App\Http\Resources\V1\ChecklistResource;
 use App\Models\Checklist;
-use App\Services\Checklist\CheckListService;
 use App\Services\Checklist\ChecklistCreateService;
+use App\Services\Checklist\CheckListService;
 use App\Services\Checklist\ChecklistUpdateService;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ChecklistController extends Controller
 {

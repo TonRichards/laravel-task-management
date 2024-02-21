@@ -3,12 +3,12 @@
 namespace App\Services\User;
 
 use App\Models\User;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserRegisterService
 {
-    public function register(Array $data): void
+    public function register(array $data): void
     {
         User::create([
             'uuid' => Str::uuid(),

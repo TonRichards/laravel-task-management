@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\ServiceProvider;
 
 class ResponseServiceProvider extends ServiceProvider
 {
@@ -20,25 +20,25 @@ class ResponseServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Response::macro('success', function($data = []) {
+        Response::macro('success', function ($data = []) {
             return Response::json([
                 'success' => true,
                 'data' => $data,
-            ], 200) ;
+            ], 200);
         });
 
-        Response::macro('created', function($data = []) {
+        Response::macro('created', function ($data = []) {
             return Response::json([
                 'success' => true,
                 'data' => $data,
-            ], 201) ;
+            ], 201);
         });
 
-        Response::macro('unauthorized', function() {
+        Response::macro('unauthorized', function () {
             return Response::json([
                 'success' => false,
-                'message' => "Unauthorized to this resources",
-            ], 401) ;
+                'message' => 'Unauthorized to this resources',
+            ], 401);
         });
     }
 }

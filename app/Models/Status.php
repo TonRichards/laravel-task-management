@@ -11,6 +11,6 @@ class Status extends Model
     protected $fillable = [
         'name',
         'display_name',
-        'space_id'
+        'space_id',
     ];
 }

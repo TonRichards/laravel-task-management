@@ -25,7 +25,7 @@ class ChecklistStoreRequest extends FormRequest
 
         return [
             'name' => 'required|string',
-            'task_id' => 'required|integer'
+            'task_id' => 'required|integer',
         ];
     }
 }

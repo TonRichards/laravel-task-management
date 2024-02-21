@@ -27,12 +27,12 @@ class SetupDataSeeding extends Command
      */
     public function handle()
     {
-        $this->info("Started seeding data");
+        $this->info('Started seeding data');
 
         $this->seedingStatuses();
         $this->seedingTypes();
 
-        $this->info("Finished seeding data");
+        $this->info('Finished seeding data');
     }
 
     private function seedingStatuses()
@@ -42,11 +42,11 @@ class SetupDataSeeding extends Command
         foreach ($statuses as $status) {
             Status::updateOrCreate([
                 'name' => $status['name'],
-            ],[
+            ], [
                 'name' => $status['name'],
                 'display_name' => $status['display_name'],
             ]);
-        };
+        }
     }
 
     private function seedingTypes()
@@ -56,12 +56,12 @@ class SetupDataSeeding extends Command
         foreach ($types as $type) {
             Type::updateOrCreate([
                 'name' => $type['name'],
-                'scope' => $type['scope']
-            ],[
+                'scope' => $type['scope'],
+            ], [
                 'name' => $type['name'],
                 'scope' => $type['scope'],
-                'display_name' =>$type['display_name']
+                'display_name' => $type['display_name'],
             ]);
-        };
+        }
     }
 }

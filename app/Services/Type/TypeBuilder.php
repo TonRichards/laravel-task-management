@@ -12,7 +12,7 @@ class TypeBuilder
         return new Type();
     }
 
-    public function getTypeList(string $scope  = null): Collection
+    public function getTypeList(string $scope = null): Collection
     {
         $types = $this->model();
 

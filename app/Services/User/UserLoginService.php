@@ -11,13 +11,13 @@ class UserLoginService
     {
         $user = User::firstWhere('email', $email);
 
-        if (!$user) {
+        if (! $user) {
             return null;
         }
 
         $check = Hash::check($password, $user->password);
 
-        if (!$check) {
+        if (! $check) {
             return null;
         }
 

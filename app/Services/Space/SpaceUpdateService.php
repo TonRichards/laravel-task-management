@@ -10,7 +10,7 @@ class SpaceUpdateService
     {
         return $space->update([
             'name' => $data['name'],
-            'slug' => $data['slug']
+            'slug' => $data['slug'],
         ]);
     }
 }

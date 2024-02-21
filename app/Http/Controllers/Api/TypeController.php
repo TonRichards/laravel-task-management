@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use App\Services\Type\TypeBuilder;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TypeCollection;
+use App\Services\Type\TypeBuilder;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class TypeController extends Controller
 {

@@ -2,9 +2,6 @@
 
 namespace App\Http\Requests\V1\Task;
 
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TaskUpdateStatusRequest extends FormRequest
@@ -25,7 +22,7 @@ class TaskUpdateStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status_id' => 'required|integer'
+            'status_id' => 'required|integer',
         ];
     }
 }

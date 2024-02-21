@@ -3,8 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\collection;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Support\collection;
 
 class TypeCollection extends ResourceCollection
 {
@@ -18,7 +18,7 @@ class TypeCollection extends ResourceCollection
         return $this->collection->transform(function ($item) {
             return [
                 'id' => $item->id,
-                'display_name' => $item->display_name
+                'display_name' => $item->display_name,
             ];
         });
     }

@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Type;
 use App\Models\Space;
+use App\Models\Type;
 use Illuminate\Testing\Fluent\AssertableJson;
 
 it('create a new space', function () {

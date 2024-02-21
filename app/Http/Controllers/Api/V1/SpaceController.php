@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Space;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use App\Services\Space\SpaceService;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\V1\SpaceCollection;
-use App\Http\Resources\V1\SpaceResource;
-use App\Services\Space\SpaceCreateService;
 use App\Http\Requests\Space\V1\SpaceStoreRequest;
 use App\Http\Requests\Space\V1\SpaceUpdateRequest;
+use App\Http\Resources\V1\SpaceCollection;
+use App\Http\Resources\V1\SpaceResource;
+use App\Models\Space;
+use App\Services\Space\SpaceCreateService;
+use App\Services\Space\SpaceService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class SpaceController extends Controller
 {
