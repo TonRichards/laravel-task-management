@@ -13,11 +13,8 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    protected UserService $userService;
-
-    public function __construct(UserService $userService)
+    public function __construct(protected UserService $userService)
     {
-        $this->userService = $userService;
     }
 
     public function index(Request $request): JsonResponse
@@ -34,9 +31,7 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request, User $user): JsonResponse
     {
-        $data = $request->validated();
-
-        $user = $this->userService->update($user, $data);
+        $user = $this->userService->update($user, $request->validated());
 
         return response()->success(new UserResource($user));
     }
