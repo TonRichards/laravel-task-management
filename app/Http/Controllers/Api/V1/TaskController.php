@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\controller;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\Task\TaskStoreRequest;
 use App\Http\Requests\V1\Task\TaskUpdateRequest;
 use App\Http\Requests\V1\Task\TaskUpdateStatusRequest;

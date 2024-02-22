@@ -9,7 +9,7 @@ use App\Http\Resources\V1\ChecklistCollection;
 use App\Http\Resources\V1\ChecklistResource;
 use App\Models\Checklist;
 use App\Services\Checklist\ChecklistCreateService;
-use App\Services\Checklist\CheckListService;
+use App\Services\Checklist\ChecklistService;
 use App\Services\Checklist\ChecklistUpdateService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ class ChecklistController extends Controller
 {
     protected ChecklistService $service;
 
-    public function __construct(CheckListService $service)
+    public function __construct(ChecklistService $service)
     {
         $this->service = $service;
     }

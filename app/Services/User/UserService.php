@@ -15,9 +15,11 @@ class UserService
 
     public function update(User $user, array $data): User
     {
-        return $user->update([
+        $user->update([
             'name' => $data['name'],
             'email' => $data['email'],
         ]);
+
+        return $user;
     }
 }
