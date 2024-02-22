@@ -3,23 +3,19 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Space\V1\SpaceStoreRequest;
-use App\Http\Requests\Space\V1\SpaceUpdateRequest;
+use App\Http\Requests\V1\Space\SpaceStoreRequest;
+use App\Http\Requests\V1\Space\SpaceUpdateRequest;
 use App\Http\Resources\V1\SpaceCollection;
 use App\Http\Resources\V1\SpaceResource;
 use App\Models\Space;
-use App\Services\Space\SpaceCreateService;
 use App\Services\Space\SpaceService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class SpaceController extends Controller
 {
-    protected SpaceService $spaceService;
-
-    public function __construct(SpaceService $spaceService)
+    public function __construct(protected SpaceService $spaceService)
     {
-        $this->spaceService = $spaceService;
     }
 
     public function index(Request $request): JsonResponse
@@ -29,9 +25,9 @@ class SpaceController extends Controller
         return response()->success(new SpaceCollection($spaces));
     }
 
-    public function store(SpaceStoreRequest $request, SpaceCreateService $service): JsonResponse
+    public function store(SpaceStoreRequest $request): JsonResponse
     {
-        $space = $service->store($request->validated());
+        $space = $this->spaceService->store($request);
 
         return response()->success(new SpaceResource($space));
     }
@@ -41,11 +37,9 @@ class SpaceController extends Controller
         return response()->success(new SpaceResource($space));
     }
 
-    public function update(Space $space, SpaceUpdateRequest $request, SpaceUpdateService $service): JsonResponse
+    public function update(Space $space, SpaceUpdateRequest $request): JsonResponse
     {
-        $data = $request->validated();
-
-        $space = $this->service->update($space, $data);
+        $space = $this->spaceService->update($space, $request);
 
         return response()->success(new SpaceResource($space));
     }

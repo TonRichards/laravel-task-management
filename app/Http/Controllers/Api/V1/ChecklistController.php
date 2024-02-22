@@ -8,45 +8,40 @@ use App\Http\Requests\V1\Checklist\ChecklistUpdateRequest;
 use App\Http\Resources\V1\ChecklistCollection;
 use App\Http\Resources\V1\ChecklistResource;
 use App\Models\Checklist;
-use App\Services\Checklist\ChecklistCreateService;
-use App\Services\Checklist\CheckListService;
-use App\Services\Checklist\ChecklistUpdateService;
+use App\Services\Checklist\ChecklistService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ChecklistController extends Controller
 {
-    protected ChecklistService $service;
-
-    public function __construct(CheckListService $service)
+    public function __construct(protected ChecklistService $checklistService)
     {
-        $this->service = $service;
     }
 
     public function index(Request $request): JsonResponse
     {
-        $data = $this->service->paginate($request);
+        $data = $this->checklistService->paginate($request);
 
         return response()->success(new ChecklistCollection($data));
     }
 
-    public function store(ChecklistStoreRequest $request, ChecklistCreateService $createService): JsonResponse
+    public function store(ChecklistStoreRequest $request): JsonResponse
     {
-        $data = $createService->create($request->validated());
+        $data = $this->checklistService->store($request->validated());
 
         return response()->success(new ChecklistResource($data));
     }
 
-    public function update(Checklist $checklist, ChecklistUpdateRequest $request, ChecklistUpdateService $updateService): JsonResponse
+    public function update(Checklist $checklist, ChecklistUpdateRequest $request): JsonResponse
     {
-        $data = $updateService->update($checklist, $request->validated());
+        $data = $this->checklistService->update($checklist, $request->validated());
 
         return response()->success(new ChecklistResource($data));
     }
 
-    public function updateStatus(Checklist $checklist, ChecklistUpdateService $updateService): JsonResponse
+    public function updateStatus(Checklist $checklist): JsonResponse
     {
-        $data = $updateService->updateStatus($checklist);
+        $data = $this->checklistService->updateStatus($checklist);
 
         return response()->success(new ChecklistResource($data));
     }
