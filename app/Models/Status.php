@@ -13,4 +13,11 @@ class Status extends Model
         'display_name',
         'space_id',
     ];
+
+    public const TODO = 'todo';
+
+    public static function getStatusId(string $name): int
+    {
+        return self::where('name', $name)->first()->id;
+    }
 }
