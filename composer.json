@@ -55,6 +55,7 @@
         ],
         "analyse": "./vendor/bin/phpstan analyse",
         "format": "./vendor/bin/pint",
+        "test": "./vendor/bin/pest",
         "check": [
             "@analyse",
             "@format"

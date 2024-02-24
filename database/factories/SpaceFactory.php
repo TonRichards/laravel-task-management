@@ -17,11 +17,9 @@ class SpaceFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->randomDigitNot(0),
             'uuid' => fake()->uuid(),
             'slug' => fake()->slug(),
             'name' => fake()->name(),
-            'type_id' => 1,
             'user_id' => 1,
         ];
     }

@@ -15,7 +15,7 @@ class SpaceCollection extends ResourceCollection
     {
         return $this->collection->transform(function ($item) {
             return [
-                'id' => $item->uuid,
+                'uuid' => $item->uuid,
                 'slug' => $item->slug,
                 'name' => $item->name,
                 'type' => $item->type->display_name,
