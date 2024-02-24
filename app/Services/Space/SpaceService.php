@@ -12,7 +12,7 @@ class SpaceService
 {
     public function paginate(Request $request): LengthAwarePaginator
     {
-        return Space::paginate($request->get('per_page', 10));
+        return Space::with('type')->paginate($request->get('per_page', 10));
     }
 
     public function store(SpaceStoreRequest $request): Space
