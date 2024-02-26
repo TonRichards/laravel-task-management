@@ -17,7 +17,6 @@ class TypeFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->randomDigitNot(0),
             'name' => fake()->slug(),
             'display_name' => fake()->name(),
         ];
@@ -28,6 +27,15 @@ class TypeFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'scope' => 'space',
+            ];
+        });
+    }
+
+    public function task(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'scope' => 'task',
             ];
         });
     }

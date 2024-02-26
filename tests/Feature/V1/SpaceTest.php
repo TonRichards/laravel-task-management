@@ -8,7 +8,7 @@ beforeEach(function () {
     $this->type = Type::factory()->space()->create();
 });
 
-it('can show list of spaces correctly', function () {
+it('can show list of spaces', function () {
     $spaces = Space::factory()->count(3)->create([
         'type_id' => $this->type->id,
     ]);
@@ -29,7 +29,7 @@ it('can show list of spaces correctly', function () {
         });
 });
 
-it('can show space correctly', function () {
+it('can show a space detail', function () {
     $space = Space::factory()->create([
         'type_id' => $this->type->id,
     ]);
