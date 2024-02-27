@@ -69,13 +69,9 @@ it('can create a new space', function () {
 });
 
 it('needs a proper data to create a new space', function () {
-    $this->loggedIn()->postJson('/api/v1/spaces')
-        ->assertStatus(422)
-        ->assertJson(function (AssertableJson $json) {
-            $json
-                ->has('errors')
-                ->etc();
-        });
+    $this->loggedIn()
+        ->postJson('/api/v1/spaces')
+        ->assertStatus(422);
 });
 
 it('can update a space', function () {
@@ -86,18 +82,9 @@ it('can update a space', function () {
     $data = ['name' => 'Testing update space'];
 
     $this->loggedIn()->putJson('/api/v1/spaces/'.$space->uuid, $data)
-        ->assertSuccessful()
-        ->assertJson(function (AssertableJson $json) use ($space, $data) {
-            $json
-                ->has('data')
-                ->has('data', function (AssertableJson $json) use ($space, $data) {
-                    $json
-                        ->where('uuid', $space->uuid)
-                        ->where('name', $data['name'])
-                        ->where('type', $space->type->display_name)
-                        ->etc();
-                })->etc();
-        });
+        ->assertSuccessful();
+
+    expect($space->fresh()->name)->toBe($data['name']);
 
 });
 

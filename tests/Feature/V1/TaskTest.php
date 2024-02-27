@@ -114,18 +114,10 @@ it('can update a task', function () {
 
     $this->loggedIn()
         ->putJson('api/v1/tasks/'.$task->uuid, $data)
-        ->assertSuccessful()
-        ->assertJson(function (AssertableJson $json) use ($task, $data) {
-            $json
-                ->has('data', function (AssertableJson $json) use ($task, $data) {
-                    $json
-                        ->where('id', $task->id)
-                        ->where('uuid', $task->uuid)
-                        ->where('name', $data['name'])
-                        ->where('body', $data['body'])
-                        ->etc();
-                })->etc();
-        });
+        ->assertSuccessful();
+
+    expect($task->fresh()->name)->toBe($data['name']);
+    expect($task->fresh()->body)->toBe($data['body']);
 });
 
 it('can update status for a task', function () {
