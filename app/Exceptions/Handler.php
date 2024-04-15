@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -49,6 +50,12 @@ class Handler extends ExceptionHandler
                     return response()->json([
                         'message' => class_basename($e->getModel()).' Not found',
                     ], 404);
+
+                case ValidationException::class:
+
+                    return response()->json([
+                        'message' => $e->getMessage(),
+                    ], 422);
 
                 default:
 

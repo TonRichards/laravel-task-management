@@ -31,6 +31,7 @@ class AuthController extends Controller
         }
 
         return response()->success([
+            'id' => $user->uuid,
             'name' => $user->name,
             'email' => $user->email,
             'token' => $user->createToken('LaravelTaskManagementToken')->accessToken,
