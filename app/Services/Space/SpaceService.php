@@ -10,9 +10,14 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class SpaceService
 {
+    public function model(): Space
+    {
+        return new Space();
+    }
+
     public function paginate(Request $request): LengthAwarePaginator
     {
-        return Space::with('type')->paginate($request->get('per_page', 10));
+        return $this->model()->with(['type', 'tasks'])->paginate($request->get('per_page', 20));
     }
 
     public function store(SpaceStoreRequest $request): Space
