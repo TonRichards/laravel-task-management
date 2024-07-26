@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Enums\Type as TypeEnum;
+use Illuminate\Database\Eloquent\Builder;
 
 class Space extends Model
 {
@@ -37,5 +39,10 @@ class Space extends Model
     public function getRouteKeyName(): string
     {
         return 'uuid';
+    }
+
+    public function subSpaces(): HasMany
+    {
+        return $this->hasMany($this)->where('type_id', getSpaceTypeId(TypeEnum::SUB_SPACE->value));
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Requests\V1\Space\SpaceUpdateRequest;
 use App\Models\Space;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Enums\Type as TypeEnum;
 
 class SpaceService
 {
@@ -17,7 +18,7 @@ class SpaceService
 
     public function paginate(Request $request): LengthAwarePaginator
     {
-        return $this->model()->with(['type', 'tasks'])->paginate($request->get('per_page', 20));
+        return $this->model()->where('type_id', getSpaceTypeId(TypeEnum::MAIN_SPACE->value))->with(['type', 'subSpaces'])->paginate($request->get('per_page', 20));
     }
 
     public function store(SpaceStoreRequest $request): Space

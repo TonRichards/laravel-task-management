@@ -16,4 +16,9 @@ class Type extends Model
         'display_name',
         'scope',
     ];
+
+    public function getTypeId(string $name): int
+    {
+        return $this->where('name', $name)->first()->id;
+    }
 }

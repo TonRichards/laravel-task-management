@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\V1;
 
-use App\Http\Resources\V1\Spaces\TaskCollection;
+use App\Http\Resources\V1\Spaces\SubSpaceCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Collection;
@@ -20,7 +20,7 @@ class SpaceCollection extends ResourceCollection
                 'slug' => $item->slug,
                 'name' => $item->name,
                 'type' => $item->type->display_name,
-                'tasks' => new TaskCollection($item->tasks),
+                'sub_spaces' => new SubSpaceCollection($item->subSpaces),
             ];
         });
     }
