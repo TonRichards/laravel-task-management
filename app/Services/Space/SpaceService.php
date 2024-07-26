@@ -2,12 +2,12 @@
 
 namespace App\Services\Space;
 
+use App\Enums\Type as TypeEnum;
 use App\Http\Requests\V1\Space\SpaceStoreRequest;
 use App\Http\Requests\V1\Space\SpaceUpdateRequest;
 use App\Models\Space;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Enums\Type as TypeEnum;
 
 class SpaceService
 {
