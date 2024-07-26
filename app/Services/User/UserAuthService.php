@@ -9,7 +9,7 @@ class UserAuthService
 {
     public function register(array $data): void
     {
-        User::create((new UserDtoService($data))->make());
+        User::create((new UserDataService($data))->make());
     }
 
     public function checkUserLogin(string $email, string $password): User|null

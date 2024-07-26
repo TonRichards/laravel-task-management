@@ -6,7 +6,7 @@ use App\Models\Space;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
-class SpaceDtoService
+class SpaceDataService
 {
     public function __construct(protected array $params)
     {

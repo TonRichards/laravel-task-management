@@ -7,7 +7,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class UserDtoService
+class UserDataService
 {
     public function __construct(protected array $params)
     {

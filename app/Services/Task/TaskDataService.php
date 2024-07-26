@@ -7,7 +7,7 @@ use App\Models\Task;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
-class TaskDtoService
+class TaskDataService
 {
     public function __construct(protected array $params)
     {

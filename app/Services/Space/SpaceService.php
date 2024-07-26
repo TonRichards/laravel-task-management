@@ -22,12 +22,12 @@ class SpaceService
 
     public function store(SpaceStoreRequest $request): Space
     {
-        return Space::create((new SpaceDtoService($request->validated()))->make());
+        return $this->model()->create((new SpaceDataService($request->validated()))->make());
     }
 
     public function update(Space $space, SpaceUpdateRequest $request): Space
     {
-        $space->update((new SpaceDtoService($request->validated()))->make($space));
+        $space->update((new SpaceDataService($request->validated()))->make($space));
 
         return $space;
     }

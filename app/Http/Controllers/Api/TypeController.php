@@ -4,24 +4,24 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TypeCollection;
-use App\Services\Type\TypeBuilder;
+use App\Services\Type\TypeService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class TypeController extends Controller
 {
-    protected TypeBuilder $typeBuilder;
+    protected TypeService $typeService;
 
-    public function __construct(TypeBuilder $typeBuilder)
+    public function __construct(TypeService $typeService)
     {
-        $this->typeBuilder = $typeBuilder;
+        $this->typeService = $typeService;
     }
 
     public function index(Request $request): JsonResponse
     {
         $scope = $request->get('scope');
 
-        $types = $this->typeBuilder->getTypeList($scope);
+        $types = $this->typeService->getTypeList($scope);
 
         return response()->success(new TypeCollection($types));
     }

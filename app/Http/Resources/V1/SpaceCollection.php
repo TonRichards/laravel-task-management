@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources\V1;
 
+use App\Http\Resources\V1\Spaces\TaskCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Collection;
-use App\Http\Resources\V1\Spaces\TaskCollection;
 
 class SpaceCollection extends ResourceCollection
 {

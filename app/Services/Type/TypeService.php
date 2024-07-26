@@ -5,7 +5,7 @@ namespace App\Services\Type;
 use App\Models\Type;
 use Illuminate\Database\Eloquent\Collection;
 
-class TypeBuilder
+class TypeService
 {
     public function model(): Type
     {

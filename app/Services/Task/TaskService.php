@@ -25,12 +25,12 @@ class TaskService
 
     public function store(TaskStoreRequest $request): Task
     {
-        return Task::create((new TaskDtoService($request->validated()))->make());
+        return Task::create((new TaskDataService($request->validated()))->make());
     }
 
     public function update(Task $task, TaskUpdateRequest $request): Task
     {
-        $task->update((new TaskDtoService($request->validated()))->make($task));
+        $task->update((new TaskDataService($request->validated()))->make($task));
 
         return $task;
     }
