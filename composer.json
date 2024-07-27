@@ -58,7 +58,8 @@
         "test": "./vendor/bin/pest",
         "check": [
             "@analyse",
-            "@format"
+            "@format",
+            "@test"
         ]
     },
     "extra": {

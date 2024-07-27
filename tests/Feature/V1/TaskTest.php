@@ -8,7 +8,7 @@ use Illuminate\Testing\Fluent\AssertableJson;
 
 beforeEach(function () {
     $this->space = Space::factory()
-        ->for(Type::factory()->space())
+        ->for(Type::factory()->mainSpace())
         ->create();
 
     $this->status = Status::factory()

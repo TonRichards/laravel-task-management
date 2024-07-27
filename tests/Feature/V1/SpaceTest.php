@@ -5,7 +5,7 @@ use App\Models\Type;
 use Illuminate\Testing\Fluent\AssertableJson;
 
 beforeEach(function () {
-    $this->type = Type::factory()->space()->create();
+    $this->type = Type::factory()->mainSpace()->create();
 });
 
 it('can show list of spaces', function () {

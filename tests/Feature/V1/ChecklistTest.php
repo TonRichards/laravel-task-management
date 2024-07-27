@@ -11,7 +11,7 @@ beforeEach(function () {
     $this->task = Task::factory()
         ->todo()
         ->for(Type::factory()->task())
-        ->for(Space::factory()->for(Type::factory()->space()));
+        ->for(Space::factory()->for(Type::factory()->mainSpace()));
 });
 
 it('can show a list of checklist', function () {
