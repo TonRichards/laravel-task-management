@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Resources\V1;
+namespace App\Http\Resources\V1\Spaces;
 
-use App\Http\Resources\V1\Spaces\SubSpaceCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Collection;
@@ -21,7 +20,6 @@ class SpaceCollection extends ResourceCollection
                 'name' => $item->name,
                 'type' => $item->type->display_name,
                 'sub_spaces' => new SubSpaceCollection($item->subSpaces),
-                'sub_spaces_count' => $item->subSpaceCount(),
                 'created_by' => $item->user->name,
             ];
         });

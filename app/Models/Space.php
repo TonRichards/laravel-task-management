@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\SpaceType;
+use App\Enums\TaskType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -38,6 +39,11 @@ class Space extends Model
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
+    }
+
+    public function mainTasks(): HasMany
+    {
+        return $this->hasMany(Task::class)->where('type_id', getTaskTypeId(TaskType::MAIN_TASK->value));
     }
 
     public function getRouteKeyName(): string

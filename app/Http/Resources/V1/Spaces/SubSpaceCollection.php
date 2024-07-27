@@ -17,6 +17,7 @@ class SubSpaceCollection extends ResourceCollection
             return [
                 'uuid' => $item->uuid,
                 'name' => $item->name,
+                'created_by' => $item->user->name,
             ];
         });
     }
