@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\Type as TypeEnum;
+use App\Enums\SpaceType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -37,7 +37,7 @@ class TypeFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'scope' => 'space',
-                'name' => TypeEnum::MAIN_SPACE->value,
+                'name' => SpaceType::MAIN_SPACE->value,
             ];
         });
     }

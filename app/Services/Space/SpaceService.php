@@ -2,7 +2,7 @@
 
 namespace App\Services\Space;
 
-use App\Enums\Type as TypeEnum;
+use App\Enums\SpaceType;
 use App\Http\Requests\V1\Space\SpaceStoreRequest;
 use App\Http\Requests\V1\Space\SpaceUpdateRequest;
 use App\Models\Space;
@@ -18,7 +18,10 @@ class SpaceService
 
     public function paginate(Request $request): LengthAwarePaginator
     {
-        return $this->model()->where('type_id', getSpaceTypeId(TypeEnum::MAIN_SPACE->value))->with(['type', 'subSpaces'])->paginate($request->get('per_page', 20));
+        return $this->model()
+            ->where('type_id', getSpaceTypeId(SpaceType::MAIN_SPACE->value))
+            ->with(['user', 'type', 'subSpaces'])
+            ->paginate($request->get('per_page', 20));
     }
 
     public function store(SpaceStoreRequest $request): Space
