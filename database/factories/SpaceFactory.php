@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\SpaceType;
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,9 +20,35 @@ class SpaceFactory extends Factory
     {
         return [
             'uuid' => fake()->uuid(),
-            'slug' => fake()->slug(),
             'name' => fake()->name(),
-            'user_id' => 1,
+            'user_id' => fake()->uuid(),
         ];
+    }
+
+    public function projectType(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'type' => SpaceType::PROJECT->value,
+            ];
+        });
+    }
+
+    public function folderType(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'type' => SpaceType::FOLDER->value,
+            ];
+        });
+    }
+
+    public function todoStatus(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => Status::TO_DO->value,
+            ];
+        });
     }
 }

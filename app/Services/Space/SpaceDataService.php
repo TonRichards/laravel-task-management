@@ -2,6 +2,7 @@
 
 namespace App\Services\Space;
 
+use App\Enums\Status;
 use App\Models\Space;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -16,8 +17,7 @@ class SpaceDataService
     {
         $data = [
             'name' => Arr::get($this->params, 'name'),
-            'slug' => Arr::get($this->params, 'slug'),
-            'user_id' => auth()->user()->id,
+            'user_id' => auth()->user()->uuid,
         ];
 
         if (! $space) {
@@ -28,9 +28,11 @@ class SpaceDataService
             $data['space_id'] = $spaceId;
         }
 
-        if ($typeId = Arr::get($this->params, 'type_id')) {
-            $data['type_id'] = $typeId;
+        if ($type = Arr::get($this->params, 'type')) {
+            $data['type'] = $type;
         }
+
+        $data['statuses'] = config('settings.default-status');
 
         return $data;
     }

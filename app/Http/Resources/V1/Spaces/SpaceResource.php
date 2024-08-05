@@ -20,7 +20,7 @@ class SpaceResource extends JsonResource
         return [
             'uuid' => $this->uuid,
             'name' => $this->name,
-            'type' => $this->type->display_name,
+            'type' => $this->type,
             'tasks' => $this->mainTasks,
         ];
     }

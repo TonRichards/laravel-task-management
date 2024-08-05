@@ -19,8 +19,8 @@ class SpaceService
     public function paginate(Request $request): LengthAwarePaginator
     {
         return $this->model()
-            ->where('type_id', getSpaceTypeId(SpaceType::MAIN_SPACE->value))
-            ->with(['user', 'type', 'subSpaces'])
+            ->where('type', SpaceType::PROJECT->value)
+            ->with(['user', 'subSpaces'])
             ->paginate($request->get('per_page', 20));
     }
 

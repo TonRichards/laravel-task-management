@@ -16,9 +16,8 @@ class SpaceCollection extends ResourceCollection
         return $this->collection->transform(function ($item) {
             return [
                 'uuid' => $item->uuid,
-                'slug' => $item->slug,
                 'name' => $item->name,
-                'type' => $item->type->display_name,
+                'type' => $item->type,
                 'sub_spaces' => new SubSpaceCollection($item->subSpaces),
                 'created_by' => $item->user->name,
             ];

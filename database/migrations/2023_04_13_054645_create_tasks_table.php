@@ -11,20 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
-            $table->uuid('uuid')->index();
-            $table->string('name');
-            $table->text('body')->nullable();
-            $table->unsignedBigInteger('space_id');
-            $table->unsignedBigInteger('task_id')->nullable();
-            $table->unsignedBigInteger('status_id');
-            $table->unsignedInteger('type_id');
-            $table->unsignedBigInteger('user_id');
-            $table->dateTime('estimated_date')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        if (! Schema::hasTable('tasks')) {
+            Schema::create('tasks', function (Blueprint $table) {
+                $table->id();
+                $table->uuid('uuid')->index();
+                $table->string('name');
+                $table->text('body')->nullable();
+                $table->uuid('space_id');
+                $table->uuid('task_id')->nullable();
+                $table->string('status')->default('to-do');
+                $table->string('type')->index();
+                $table->uuid('user_id');
+                $table->dateTime('estimated_date')->nullable();
+                $table->dateTime('start_date')->nullable();
+                $table->dateTime('end_date')->nullable();
+                $table->timestamps();
+                $table->softDeletes();
+            });
+        };
     }
 
     /**
@@ -32,6 +36,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tasks');
+        if (Schema::hasTable('tasks')) {
+            Schema::dropIfExists('tasks');
+        }
     }
 };

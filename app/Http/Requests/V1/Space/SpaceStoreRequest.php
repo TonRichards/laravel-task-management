@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests\V1\Space;
 
+use App\Enums\SpaceType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 
 class SpaceStoreRequest extends FormRequest
 {
@@ -23,13 +25,10 @@ class SpaceStoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        $this['slug'] = Str::slug($this->name);
-
         return [
             'name' => 'required|string',
             'space_id' => 'nullable|integer',
-            'slug' => Rule::unique('spaces', 'slug'),
-            'type_id' => 'required|integer|exists:types,id',
+            'type' => ['required', 'string', new Enum(SpaceType::class)],
         ];
     }
 }

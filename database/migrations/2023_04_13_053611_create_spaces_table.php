@@ -11,16 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('spaces', function (Blueprint $table) {
-            $table->id();
-            $table->uuid('uuid')->index();
-            $table->string('name');
-            $table->unsignedBigInteger('space_id')->nullable();
-            $table->unsignedInteger('type_id');
-            $table->unsignedBigInteger('user_id');
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        if (! Schema::hasTable('spaces')) {
+            Schema::create('spaces', function (Blueprint $table) {
+                $table->id();
+                $table->uuid('uuid')->index();
+                $table->string('name');
+                $table->uuid('space_id')->nullable();
+                $table->string('type')->index();
+                $table->uuid('user_id');
+                $table->json('statuses')->nullable();
+                $table->timestamps();
+                $table->softDeletes();
+            });
+        };
     }
 
     /**
@@ -28,6 +31,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('spaces');
+        if (Schema::hasTable('spaces')) {
+            Schema::dropIfExists('spaces');
+        }
     }
 };

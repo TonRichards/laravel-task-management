@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('timelines', function (Blueprint $table) {
-            $table->id();
-            $table->morphs('timelineable');
-            $table->unsignedBigInteger('user_id');
-            $table->string('action');
-            $table->timestamps();
-        });
+        if (! Schema::hasTable('timelines')) {
+            Schema::create('timelines', function (Blueprint $table) {
+                $table->id();
+                $table->morphs('timelineable');
+                $table->uuid('user_id');
+                $table->string('action');
+                $table->string('detail');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -25,6 +28,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('timelines');
+        if (Schema::hasTable('timelines')) {
+            Schema::dropIfExists('timelines');
+        }
     }
 };

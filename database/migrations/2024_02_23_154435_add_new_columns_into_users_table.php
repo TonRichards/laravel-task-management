@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('number_of_attemp')->after('email')->default(0);
-            $table->dateTime('block_until')->after('number_of_attemp')->nullable();
-        });
+        if (! Schema::hasColumns('users', ['number_of_attemp', 'block_until'])) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->integer('number_of_attemp')->after('email')->default(0);
+                $table->dateTime('block_until')->after('number_of_attemp')->nullable();
+            });
+        }
     }
 
     /**
@@ -22,9 +24,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('block_until');
-            $table->dropColumn('number_of_attemp');
-        });
+        if (Schema::hasColumns('users', ['number_of_attemp', 'block_until'])) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->dropColumn('block_until');
+                $table->dropColumn('number_of_attemp');
+            });
+        }
     }
 };

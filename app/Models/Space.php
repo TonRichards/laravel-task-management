@@ -21,29 +21,18 @@ class Space extends Model
         'uuid',
         'name',
         'space_id',
-        'type_id',
-        'slug',
+        'type',
         'user_id',
     ];
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function type(): BelongsTo
-    {
-        return $this->belongsTo(Type::class);
+        return $this->belongsTo(User::class, 'user_id', 'uuid');
     }
 
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
-    }
-
-    public function mainTasks(): HasMany
-    {
-        return $this->hasMany(Task::class)->where('type_id', getTaskTypeId(TaskType::MAIN_TASK->value));
     }
 
     public function getRouteKeyName(): string
@@ -53,7 +42,7 @@ class Space extends Model
 
     public function subSpaces(): HasMany
     {
-        return $this->hasMany($this)->where('type_id', getSpaceTypeId(SpaceType::SUB_SPACE->value));
+        return $this->hasMany($this)->where('type', SpaceType::FOLDER->value);
     }
 
     public function subSpaceCount(): int

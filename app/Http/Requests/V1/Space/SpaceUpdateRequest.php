@@ -22,11 +22,8 @@ class SpaceUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $this['slug'] = Str::slug($this->name);
-
         return [
             'name' => 'required',
-            'slug' => 'unique:spaces,slug',
         ];
     }
 }

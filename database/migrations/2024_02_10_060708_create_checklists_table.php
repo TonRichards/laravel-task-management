@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('checklists', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('task_id');
-            $table->string('name');
-            $table->boolean('is_checked')->default(0);
-            $table->timestamps();
-        });
+        if (! Schema::hasTable('checklists')) {
+            Schema::create('checklists', function (Blueprint $table) {
+                $table->id();
+                $table->uuid('task_id');
+                $table->string('name');
+                $table->boolean('is_checked')->default(0);
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -25,6 +27,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('checklists');
+        if (Schema::hasTable('checklists')) {
+            Schema::dropIfExists('checklists');
+        }
     }
 };

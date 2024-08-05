@@ -8,16 +8,16 @@ use Illuminate\Database\Eloquent\Collection;
 
 class MenuService
 {
-    public function spaceModel(): Space
+    public function model(): Space
     {
         return new Space();
     }
 
     public function getSpaceMenus(): Collection
     {
-        return $this->spaceModel()
-            ->where('type_id', getSpaceTypeId(SpaceType::MAIN_SPACE->value))
-            ->where('user_id', auth()->user()->id)
+        return $this->model()
+            ->where('type', SpaceType::PROJECT->value)
+            ->where('user_id', auth()->user()->uuid)
             ->get();
     }
 }

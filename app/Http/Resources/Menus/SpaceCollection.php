@@ -17,7 +17,6 @@ class SpaceCollection extends ResourceCollection
             return [
                 'uuid' => $item->uuid,
                 'name' => $item->name,
-                'sub_spaces' => new SubSpaceCollection($item->subSpaces),
             ];
         });
     }
