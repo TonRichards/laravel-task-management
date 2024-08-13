@@ -25,4 +25,9 @@ class MenuController extends Controller
                 return response()->success();
         }
     }
+
+    public function getFavorites(Request $request): JsonResponse
+    {
+        return response()->success(new SpaceCollection($this->menuService->getFavoritedSpaces()));
+    }
 }

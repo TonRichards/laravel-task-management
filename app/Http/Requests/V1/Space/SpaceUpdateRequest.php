@@ -3,7 +3,6 @@
 namespace App\Http\Requests\V1\Space;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 
 class SpaceUpdateRequest extends FormRequest
 {

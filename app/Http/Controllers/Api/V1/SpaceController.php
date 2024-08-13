@@ -50,4 +50,11 @@ class SpaceController extends Controller
 
         return response()->success();
     }
+
+    public function favorited(Space $space): JsonResponse
+    {
+        $this->spaceService->favorited($space);
+
+        return response()->success();
+    }
 }

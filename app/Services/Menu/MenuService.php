@@ -20,4 +20,12 @@ class MenuService
             ->where('user_id', auth()->user()->uuid)
             ->get();
     }
+
+    public function getFavoritedSpaces(): Collection
+    {
+        return $this->model()
+            ->where('user_id', auth()->user()->uuid)
+            ->where('is_favorited', true)
+            ->get();
+    }
 }

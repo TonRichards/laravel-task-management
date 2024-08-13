@@ -35,4 +35,11 @@ class SpaceService
 
         return $space;
     }
+
+    public function favorited(Space $space): void
+    {
+        $space->update([
+            'is_favorited' => ! $space->is_favorited,
+        ]);
+    }
 }

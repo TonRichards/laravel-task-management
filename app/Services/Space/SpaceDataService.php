@@ -2,7 +2,6 @@
 
 namespace App\Services\Space;
 
-use App\Enums\Status;
 use App\Models\Space;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;

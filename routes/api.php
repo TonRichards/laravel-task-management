@@ -24,4 +24,5 @@ Route::get('types', [TypeController::class, 'index']);
 
 Route::controller(MenuController::class)->group(function () {
     Route::get('menus', 'getMenus')->middleware(['api', 'auth:api']);
+    Route::get('menus/favorites', 'getFavorites')->middleware(['api', 'auth:api']);
 });
