@@ -57,4 +57,11 @@ class SpaceController extends Controller
 
         return response()->success();
     }
+
+    public function subSpaces(Request $request, Space $space): JsonResponse
+    {
+        $spaces = $this->spaceService->getSubSpaces($request, $space);
+
+        return response()->success(new SpaceCollection($spaces));
+    }
 }

@@ -25,7 +25,7 @@ class SpaceStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'space_id' => 'nullable|integer',
+            'space_id' => 'nullable|string',
             'type' => ['required', 'string', new Enum(SpaceType::class)],
         ];
     }

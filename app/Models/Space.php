@@ -26,6 +26,10 @@ class Space extends Model
         'is_favorited',
     ];
 
+    protected $casts = [
+        'statuses' => 'array',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'uuid');
@@ -43,7 +47,7 @@ class Space extends Model
 
     public function subSpaces(): HasMany
     {
-        return $this->hasMany($this)->where('type', SpaceType::FOLDER->value);
+        return $this->hasMany($this, 'space_id', 'uuid')->where('type', SpaceType::FOLDER->value);
     }
 
     public function subSpaceCount(): int

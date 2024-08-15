@@ -20,9 +20,9 @@ class Task extends Model
         'name',
         'body',
         'space_id',
-        'type_id',
+        'type',
         'user_id',
-        'status_id',
+        'status',
         'task_id',
     ];
 

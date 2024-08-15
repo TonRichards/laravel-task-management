@@ -42,4 +42,11 @@ class SpaceService
             'is_favorited' => ! $space->is_favorited,
         ]);
     }
+
+    public function getSubSpaces(Request $request, Space $space): LengthAwarePaginator
+    {
+        return $space->subSpaces()
+            ->where('type', SpaceType::FOLDER->value)
+            ->paginate($request->get('per_page', 20));
+    }
 }

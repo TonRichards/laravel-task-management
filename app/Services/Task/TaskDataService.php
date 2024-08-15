@@ -2,7 +2,7 @@
 
 namespace App\Services\Task;
 
-use App\Models\Status;
+use App\Enums\Status;
 use App\Models\Task;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -17,21 +17,21 @@ class TaskDataService
     {
         $data = [
             'name' => Arr::get($this->params, 'name'),
-            'type_id' => Arr::get($this->params, 'type_id'),
+            'type' => Arr::get($this->params, 'type'),
             'user_id' => auth()->user()->id,
         ];
 
         if (! $task) {
             $data['uuid'] = Str::uuid();
-            $data['status_id'] = Status::getStatusId(Status::TODO);
+            $data['status'] = Status::TO_DO->value;
         }
 
         if ($body = Arr::get($this->params, 'body')) {
             $data['body'] = $body;
         }
 
-        if ($statusId = Arr::get($this->params, 'status_id')) {
-            $data['status_id'] = $statusId;
+        if ($status = Arr::get($this->params, 'status')) {
+            $data['status'] = $status;
         }
 
         if ($taskId = Arr::get($this->params, 'task_id')) {

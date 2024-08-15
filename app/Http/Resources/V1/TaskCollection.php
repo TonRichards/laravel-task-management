@@ -18,9 +18,7 @@ class TaskCollection extends ResourceCollection
                 'uuid' => $item->uuid,
                 'name' => $item->name,
                 'body' => $item->body,
-                'space' => $item->space->name,
-                'type' => $item->type->display_name,
-                'sub_tasks' => new SubTaskCollection($item->subTasks),
+                'type' => $item->type,
             ];
         });
     }

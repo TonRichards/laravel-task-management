@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\V1\Task;
 
+use App\Enums\TaskType;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class TaskStoreRequest extends FormRequest
 {
@@ -24,9 +26,9 @@ class TaskStoreRequest extends FormRequest
         return [
             'name' => 'required|string',
             'body' => 'nullable|string',
-            'space_id' => 'required|integer|exists:spaces,id',
-            'type_id' => 'required|integer|exists:types,id',
-            'status_id' => 'nullable|integer',
+            'space_id' => 'required|string|exists:spaces,uuid',
+            'type' => ['required', 'string', new Enum(TaskType::class)],
+            'status' => 'nullable|integer',
             'task_id' => 'nullable|integer',
         ];
     }

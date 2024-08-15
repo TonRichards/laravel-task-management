@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\V1\Space;
 
+use App\Enums\SpaceType;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class SpaceUpdateRequest extends FormRequest
 {
@@ -22,7 +24,8 @@ class SpaceUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
+            'name' => 'required|string',
+            'type' => ['required', 'string', new Enum(SpaceType::class)],
         ];
     }
 }

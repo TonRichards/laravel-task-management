@@ -19,6 +19,7 @@ Route::controller(SpaceController::class)->group(function () {
     Route::delete('/spaces/{space}', 'destroy');
 
     Route::get('/spaces/{space}/favorited', 'favorited');
+    Route::get('/spaces/{space}/sub-spaces', 'subSpaces');
 });
 
 Route::controller(TaskController::class)->group(function () {
