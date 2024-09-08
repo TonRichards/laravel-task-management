@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\V1\Task;
 
+use App\Enums\TaskType;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class TaskUpdateRequest extends FormRequest
 {
@@ -22,10 +24,10 @@ class TaskUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'body' => 'nullable|string',
-            'type_id' => 'required|integer|exists:types,id',
-            'task_id' => 'nullable|integer',
+            'name' => ['required', 'string'],
+            'body' => ['nullable', 'string'],
+            'type' => ['required', 'string', new Enum(TaskType::class)],
+            'task_id' => ['nullable', 'integer'],
         ];
     }
 }
