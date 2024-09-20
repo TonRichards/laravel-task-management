@@ -2,6 +2,7 @@
 
 namespace App\Services\Space;
 
+use App\Data\SpaceData;
 use App\Enums\SpaceType;
 use App\Http\Requests\V1\Space\SpaceStoreRequest;
 use App\Http\Requests\V1\Space\SpaceUpdateRequest;
@@ -26,12 +27,12 @@ class SpaceService
 
     public function store(SpaceStoreRequest $request): Space
     {
-        return $this->model()->create((new SpaceDataService($request->validated()))->make());
+        return $this->model()->create((new SpaceData($request->validated()))->make());
     }
 
     public function update(Space $space, SpaceUpdateRequest $request): Space
     {
-        $space->update((new SpaceDataService($request->validated()))->make($space));
+        $space->update((new SpaceData($request->validated()))->make($space));
 
         return $space;
     }

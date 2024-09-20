@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services\Space;
+namespace App\Data;
 
 use App\Models\Space;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
-class SpaceDataService
+class SpaceData
 {
     public function __construct(protected array $params)
     {
@@ -31,7 +31,9 @@ class SpaceDataService
             $data['type'] = $type;
         }
 
-        $data['statuses'] = config('settings.default-status');
+        if (! $statuses = Arr::get($this->params, 'statuses')) {
+            $data['statuses'] = config('settings.default-status');
+        }
 
         return $data;
     }
