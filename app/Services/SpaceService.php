@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Space;
+namespace App\Services;
 
 use App\Data\SpaceData;
 use App\Enums\SpaceType;

@@ -8,7 +8,7 @@ use App\Http\Requests\V1\Checklist\ChecklistUpdateRequest;
 use App\Http\Resources\V1\ChecklistCollection;
 use App\Http\Resources\V1\ChecklistResource;
 use App\Models\Checklist;
-use App\Services\Checklist\ChecklistService;
+use App\Services\ChecklistService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Services\Task;
+namespace App\Data;
 
 use App\Enums\Status;
 use App\Models\Task;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
-class TaskDataService
+class TaskData
 {
     public function __construct(protected array $params)
     {

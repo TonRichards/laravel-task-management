@@ -9,7 +9,7 @@ use App\Http\Requests\V1\Task\TaskUpdateStatusRequest;
 use App\Http\Resources\V1\TaskCollection;
 use App\Http\Resources\V1\TaskResource;
 use App\Models\Task;
-use App\Services\Task\TaskService;
+use App\Services\TaskService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

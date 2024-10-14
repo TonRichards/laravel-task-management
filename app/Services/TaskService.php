@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Services\Task;
+namespace App\Services;
 
+use App\Data\TaskData;
 use App\Http\Requests\V1\Task\TaskStoreRequest;
 use App\Http\Requests\V1\Task\TaskUpdateRequest;
 use App\Models\Task;
@@ -25,12 +26,12 @@ class TaskService
 
     public function store(TaskStoreRequest $request): Task
     {
-        return Task::create((new TaskDataService($request->validated()))->make());
+        return Task::create((new TaskData($request->validated()))->make());
     }
 
     public function update(Task $task, TaskUpdateRequest $request): Task
     {
-        $task->update((new TaskDataService($request->validated()))->make($task));
+        $task->update((new TaskData($request->validated()))->make($task));
 
         return $task;
     }

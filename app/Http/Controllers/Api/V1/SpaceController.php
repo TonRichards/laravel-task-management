@@ -8,7 +8,7 @@ use App\Http\Requests\V1\Space\SpaceUpdateRequest;
 use App\Http\Resources\V1\Spaces\SpaceCollection;
 use App\Http\Resources\V1\Spaces\SpaceResource;
 use App\Models\Space;
-use App\Services\Space\SpaceService;
+use App\Services\SpaceService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Menu;
+namespace App\Services;
 
 use App\Enums\SpaceType;
 use App\Models\Space;

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Services\User;
+namespace App\Data;
 
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class UserDataService
+class UserData
 {
     public function __construct(protected array $params)
     {

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Enums\Scope;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Menus\SpaceCollection;
-use App\Services\Menu\MenuService;
+use App\Services\MenuService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

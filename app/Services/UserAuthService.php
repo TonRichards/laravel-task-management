@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Services\User;
+namespace App\Services;
 
+use App\Data\UserData;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -9,7 +10,7 @@ class UserAuthService
 {
     public function register(array $data): void
     {
-        User::create((new UserDataService($data))->make());
+        User::create((new UserData($data))->make());
     }
 
     public function checkUserLogin(string $email, string $password): User|null

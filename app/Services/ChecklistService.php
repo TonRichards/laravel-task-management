@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Checklist;
+namespace App\Services;
 
 use App\Models\Checklist;
 use Illuminate\Http\Request;
