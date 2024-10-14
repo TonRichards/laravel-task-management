@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\Status;
+use App\Enums\TaskType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +22,6 @@ class TaskFactory extends Factory
             'uuid' => fake()->uuid(),
             'name' => fake()->name(),
             'body' => fake()->paragraph(),
-            'user_id' => 1,
         ];
     }
 
@@ -28,7 +29,16 @@ class TaskFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'status_id' => 1,
+                'status' => STatus::TO_DO->value,
+            ];
+        });
+    }
+
+    public function mainType(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'type' => TaskType::MAIN->value,
             ];
         });
     }

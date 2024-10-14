@@ -36,9 +36,9 @@ class TaskService
         return $task;
     }
 
-    public function updateStatus(Task $task, int $statusId): Task
+    public function updateStatus(Task $task, string $status): Task
     {
-        $task->update(['status_id' => $statusId]);
+        $task->update(['status' => $status]);
 
         return $task;
     }

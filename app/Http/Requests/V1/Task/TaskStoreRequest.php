@@ -28,8 +28,8 @@ class TaskStoreRequest extends FormRequest
             'body' => 'nullable|string',
             'space_id' => 'required|string|exists:spaces,uuid',
             'type' => ['required', 'string', new Enum(TaskType::class)],
-            'status' => 'nullable|integer',
-            'task_id' => 'nullable|integer',
+            'status' => 'nullable|string',
+            'task_id' => 'nullable|string',
         ];
     }
 }

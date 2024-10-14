@@ -19,7 +19,6 @@ class SpaceCollection extends ResourceCollection
                 'name' => $item->name,
                 'type' => $item->type,
                 'is_favorited' => $item->is_favorited,
-                'created_by' => $item->user->name,
             ];
         });
     }

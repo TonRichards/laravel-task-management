@@ -47,7 +47,7 @@ class TaskController extends Controller
 
     public function updateStatus(Task $task, TaskUpdateStatusRequest $request)
     {
-        $data = $this->taskService->updateStatus($task, $request->get('status_id'));
+        $data = $this->taskService->updateStatus($task, $request->get('status'));
 
         return response()->success(new TaskResource($data));
     }

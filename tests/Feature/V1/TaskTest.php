@@ -1,33 +1,29 @@
 <?php
 
+use App\Enums\Status;
+use App\Enums\TaskType;
 use App\Models\space;
-use App\Models\Status;
 use App\Models\Task;
-use App\Models\Type;
+use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
 
 beforeEach(function () {
+    $this->user = User::factory()->create();
+
     $this->space = Space::factory()
-        ->for(Type::factory()->mainSpace())
-        ->create();
-
-    $this->status = Status::factory()
-        ->todo()
-        ->create();
-
-    $this->type = Type::factory()
-        ->task()
+        ->projectType()
+        ->for($this->user)
         ->create();
 });
 
 it('can show list of tasks', function () {
     $tasks = Task::factory()
         ->count(5)
-        ->for(Type::factory()->task())
+        ->mainType()
         ->todo()
-        ->create([
-            'space_id' => $this->space->id,
-        ]);
+        ->for($this->space)
+        ->for($this->user)
+        ->create();
 
     $this->loggedIn()
         ->getJson('api/v1/tasks?space_id='.$this->space->id)
@@ -40,8 +36,6 @@ it('can show list of tasks', function () {
                         ->where('uuid', $tasks->first()->uuid)
                         ->where('name', $tasks->first()->name)
                         ->where('body', $tasks->first()->body)
-                        ->where('space', $tasks->first()->space->name)
-                        ->where('type', $tasks->first()->type->display_name)
                         ->etc();
                 })->etc();
         });
@@ -49,11 +43,11 @@ it('can show list of tasks', function () {
 
 it('can show a task detail', function () {
     $task = Task::factory()
-        ->for(Type::factory()->task())
+        ->mainType()
         ->todo()
-        ->create([
-            'space_id' => $this->space->id,
-        ]);
+        ->for($this->space)
+        ->for($this->user)
+        ->create();
 
     $this->loggedIn()
         ->getJson('api/v1/tasks/'.$task->uuid)
@@ -74,10 +68,9 @@ it('can show a task detail', function () {
 it('can store a task correctly', function () {
     $data = [
         'name' => 'Main task',
-        'body' => 'body',
-        'space_id' => $this->space->id,
-        'type_id' => $this->type->id,
-        'status_id' => $this->status->id,
+        'body' => 'Body',
+        'type' => TaskType::MAIN->value,
+        'space_id' => $this->space->uuid,
     ];
 
     $this->loggedIn()
@@ -101,15 +94,15 @@ it('needs proper data to store a task', function () {
 it('can update a task', function () {
     $task = Task::factory()
         ->todo()
-        ->create([
-            'space_id' => $this->space->id,
-            'type_id' => $this->type->id,
-        ]);
+        ->mainType()
+        ->for($this->space)
+        ->for($this->user)
+        ->create();
 
     $data = [
         'name' => 'name',
         'body' => 'body',
-        'type_id' => $this->type->id,
+        'type' => TaskType::MAIN->value,
     ];
 
     $this->loggedIn()
@@ -123,14 +116,14 @@ it('can update a task', function () {
 it('can update status for a task', function () {
     $task = Task::factory()
         ->todo()
-        ->create([
-            'space_id' => $this->space->id,
-            'type_id' => $this->type->id,
-        ]);
+        ->for($this->space)
+        ->for($this->user)
+        ->mainType()
+        ->create();
 
     $this->loggedIn()
-        ->putJson('api/v1/tasks/'.$task->uuid.'/update-status', ['status_id' => 2])
+        ->putJson('api/v1/tasks/'.$task->uuid.'/update-status', ['status' => Status::DONE->value])
         ->assertSuccessful();
 
-    expect($task->fresh()->status_id)->toBe(2);
+    expect($task->fresh()->status)->toBe(Status::DONE->value);
 });

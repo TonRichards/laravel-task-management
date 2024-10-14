@@ -22,7 +22,7 @@ class TaskUpdateStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status_id' => 'required|integer',
+            'status' => 'required|string',
         ];
     }
 }

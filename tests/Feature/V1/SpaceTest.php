@@ -1,17 +1,22 @@
 <?php
 
+use App\Enums\SpaceType;
 use App\Models\Space;
-use App\Models\Type;
+use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
 
 beforeEach(function () {
-    $this->type = Type::factory()->mainSpace()->create();
+    $this->type = SpaceType::PROJECT->value;
+
+    $this->user = User::factory()->create();
 });
 
 it('can show list of spaces', function () {
-    $spaces = Space::factory()->count(3)->create([
-        'type_id' => $this->type->id,
-    ]);
+    $spaces = Space::factory()
+        ->projectType()
+        ->for($this->user)
+        ->count(3)
+        ->create();
 
     $this->loggedIn()->getJson('/api/v1/spaces')
         ->assertSuccessful()
@@ -21,18 +26,17 @@ it('can show list of spaces', function () {
                 ->has('data.0', function (AssertableJson $json) use ($spaces) {
                     $json
                         ->where('uuid', $spaces->first()->uuid)
-                        ->where('slug', $spaces->first()->slug)
                         ->where('name', $spaces->first()->name)
-                        ->where('type', $spaces->first()->type->display_name)
                         ->etc();
                 })->etc();
         });
 });
 
 it('can show a space detail', function () {
-    $space = Space::factory()->create([
-        'type_id' => $this->type->id,
-    ]);
+    $space = Space::factory()
+        ->projectType()
+        ->for($this->user)
+        ->create();
 
     $this->loggedIn()->getJson('/api/v1/spaces/'.$space->uuid)
         ->assertSuccessful()
@@ -43,7 +47,6 @@ it('can show a space detail', function () {
                     $json
                         ->where('uuid', $space->uuid)
                         ->where('name', $space->name)
-                        ->where('type', $space->type->display_name)
                         ->etc();
                 })->etc();
         });
@@ -52,7 +55,7 @@ it('can show a space detail', function () {
 it('can create a new space', function () {
     $this->loggedIn()->postJson('/api/v1/spaces', [
         'name' => 'Test create new space',
-        'type_id' => $this->type->id,
+        'type' => $this->type,
     ])
         ->assertSuccessful()
         ->assertJson(function (AssertableJson $json) {
@@ -61,7 +64,6 @@ it('can create a new space', function () {
                 ->has('data', function (AssertableJson $json) {
                     $json
                         ->where('name', 'Test create new space')
-                        ->where('type', $this->type->display_name)
                         ->etc();
                 })
                 ->etc();
@@ -75,23 +77,29 @@ it('needs a proper data to create a new space', function () {
 });
 
 it('can update a space', function () {
-    $space = Space::factory()->create([
-        'type_id' => $this->type->id,
-    ]);
+    $space = Space::factory()
+        ->projectType()
+        ->for($this->user)
+        ->create();
 
-    $data = ['name' => 'Testing update space'];
+    $data['name'] = 'Testing update space';
+    $data['type'] = SpaceType::PROJECT->value;
 
     $this->loggedIn()->putJson('/api/v1/spaces/'.$space->uuid, $data)
         ->assertSuccessful();
 
-    expect($space->fresh()->name)->toBe($data['name']);
+    $space = $space->fresh();
+
+    expect($space->name)->toBe($data['name']);
+    expect($space->type)->toBe($data['type']);
 
 });
 
 it('can delete space', function () {
-    $space = Space::factory()->create([
-        'type_id' => $this->type->id,
-    ]);
+    $space = Space::factory()
+        ->projectType()
+        ->for($this->user)
+        ->create();
 
     $this->loggedIn()->deleteJson('api/v1/spaces/'.$space->uuid)->assertStatus(200);
 });

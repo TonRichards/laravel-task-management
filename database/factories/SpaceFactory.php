@@ -21,7 +21,6 @@ class SpaceFactory extends Factory
         return [
             'uuid' => fake()->uuid(),
             'name' => fake()->name(),
-            'user_id' => fake()->uuid(),
         ];
     }
 
